@@ -1,0 +1,92 @@
+reddit:
+  subreddit: "unexBotTest"
+
+  credentials:
+    username: unexTest
+    clientID: 0H2MTrFZq0PP0Q
+    clientSecret: DRt7Q8C0HuV0NRKSFVMzcwrneA8
+    password: "2WUp_10mmptrY5gtDNVBC-4WrRhacy"
+    operatorUsername: Artraxaron
+    appID: "de.rtrx.a.unexbot"
+
+  submissions:
+    maxTimeDistance: 3600000
+    limit: 30
+    waitIntervall: 5000
+
+  messages:
+    sent:
+      timeSaved: 180000
+      maxTimeDistance: 900000
+      limit: 25
+      waitIntervall: 5000
+      subject: Please explain why you hate it
+      body: |
+        It looks like you are trying to submit [this](%{Submission}) to r/%{subreddit}.
+        Would you like Help (aka your post not getting removed after an hour)?
+
+        - Get help with submitting the link by answering what you hate about it
+        - Continue without help by not replying to this message and see how I'll (probably) crush your post brutally within %{HoursUntilDrop} hours.
+
+        *****
+        [*Look at my source code on GitHub*](https://github.com/Artraxon/unexBot)
+    unread:
+      maxTimeDistance: 300000
+      waitIntervall: 5000
+      limit: 25
+      answerMaxCharacters: 500
+
+  scoring:
+    timeUntilRemoval: 180000
+    commentBody: |
+      **OP needs help. Also, he hates it because...**
+
+      >!%{Reason}!<
+
+      *****
+      **Do you hate it as well? Do you think his anger is reasonable? (I don't think so tbh)**
+      **Then upvote this comment, otherwise downvote it.**
+
+      *****
+      [*Look at my source code on Github*](https://github.com/Artraxon/unexBot)
+
+
+  checks:
+    db:
+      every: 120000
+      forTimes: 8
+      comments_amount: 20
+      depth: 10
+      commentWaitIntervall: 10000
+
+DB:
+  password: ""
+  username: unexbot
+  address: localhost
+  db: postgres
+
+tihi:
+  commentMonitor:
+    maxScore: 2
+    minCommentAmount: 2
+    messageBody: |
+      The TihiBot Comment from [this Submission](%{SubmissionLink}) from u/%{author} has gathered **%{childrenCount} direct
+      replies** and is sitting at a score of **%{commentScore}** while the submission itself has a score of **%{submissionScore}**.
+    messageSubject: Controversial Post %{submissionTitle}
+
+  approval:
+    minScore: 50
+    shameComment: |
+      **OP is a lazy fuck AND SHOULD BE ASHAMED OF HIMSELF, because he didn't explain why he hated it**
+
+      **SHAME, SHAME, SHAME, SHAME!**
+
+      But since you peasant upvoted this a lot we'll let it stay. Maybe. For now.
+
+      *****
+      **Do you hate this Post?**
+      **Then upvote this comment, otherwise downvote it.**
+
+      *****
+      [*Look at my source code on Github*](https://github.com/Artraxon/unexBot)
+
