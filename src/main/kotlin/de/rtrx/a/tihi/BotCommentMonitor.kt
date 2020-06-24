@@ -1,12 +1,12 @@
-package de.rtrx.a
+package de.rtrx.a.tihi
 
 import com.uchuhimo.konf.Config
+import de.rtrx.a.RedditSpec
 import de.rtrx.a.flow.events.comments.FullComments
 import de.rtrx.a.monitor.Check
 import de.rtrx.a.monitor.Monitor
 import de.rtrx.a.monitor.MonitorBuilder
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.launch
 import net.dean.jraw.RedditClient

@@ -1,9 +1,8 @@
-package de.rtrx.a
+package de.rtrx.a.tihi
 
 import mu.KotlinLogging
 import net.dean.jraw.Endpoint
 import net.dean.jraw.RedditClient
-import net.dean.jraw.references.SubredditReference
 
 /**
  * @param subreddit The name of the subreddit without the "/r/

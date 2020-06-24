@@ -25,8 +25,8 @@ reddit:
         It looks like you are trying to submit [this](%{Submission}) to r/%{subreddit}.
         Would you like Help (aka your post not getting removed after an hour)?
 
-        - Get help with submitting the link by answering what you hate about it
-        - Continue without help by not replying to this message and see how I'll (probably) crush your post brutally within %{HoursUntilDrop} hours.
+        - Get help by answering what you hate about it
+        - Continue without help by not replying to this message and see how I'll (probably) crush your post brutally within one hour.
 
         *****
         [*Look at my source code on GitHub*](https://github.com/Artraxon/unexBot)
@@ -39,7 +39,7 @@ reddit:
   scoring:
     timeUntilRemoval: 180000
     commentBody: |
-      **OP needs help. Also, he hates it because...**
+      **OP needs help. Also, he hates this post because...**
 
       >!%{Reason}!<
 
@@ -70,12 +70,12 @@ tihi:
     maxScore: 2
     minCommentAmount: 2
     messageBody: |
-      The TihiBot Comment from [this Submission](%{SubmissionLink}) from u/%{author} has gathered **%{childrenCount} direct
+      The TihiBot Comment from [this Submission](%{submissionLink}) from u/%{author} has gathered **%{childrenCount} direct
       replies** and is sitting at a score of **%{commentScore}** while the submission itself has a score of **%{submissionScore}**.
-    messageSubject: Controversial Post %{submissionTitle}
+    messageSubject: Check out this post!
 
   approval:
-    minScore: 50
+    minScore: 1
     shameComment: |
       **OP is a lazy fuck AND SHOULD BE ASHAMED OF HIMSELF, because he didn't explain why he hated it**
 

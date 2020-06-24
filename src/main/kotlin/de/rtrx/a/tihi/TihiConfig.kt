@@ -1,4 +1,4 @@
-package de.rtrx.a
+package de.rtrx.a.tihi
 
 import com.uchuhimo.konf.ConfigSpec
 

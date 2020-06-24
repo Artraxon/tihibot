@@ -1,9 +1,11 @@
-package de.rtrx.a
+package de.rtrx.a.tihi
 
 import de.rtrx.a.flow.IFlowDispatcherStub
 import de.rtrx.a.flow.IsolationStrategy
 import de.rtrx.a.flow.events.*
 import de.rtrx.a.flow.events.comments.FullComments
+import de.rtrx.a.tihi.TihiFlow
+import de.rtrx.a.tihi.TihiFlowFactory
 import de.rtrx.a.unex.UnexFlow
 import de.rtrx.a.unex.UnexFlowFactory
 import kotlinx.coroutines.channels.ReceiveChannel
@@ -11,7 +13,6 @@ import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
 import net.dean.jraw.models.Message
 import javax.inject.Inject
-import javax.inject.Provider
 
 class TihiFlowDispatcher @Inject constructor(
         private val stub: IFlowDispatcherStub<TihiFlow, TihiFlowFactory>,

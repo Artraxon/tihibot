@@ -1,12 +1,16 @@
-package de.rtrx.a
+package de.rtrx.a.tihi
 
 import com.google.inject.Provides
 import com.google.inject.name.Names
 import com.uchuhimo.konf.Config
 import de.rtrx.a.database.DDL
+import de.rtrx.a.database.Linkage
+import de.rtrx.a.database.PostgresSQLinkage
 import de.rtrx.a.flow.*
 import de.rtrx.a.flow.events.comments.CommentsFetcherFactory
 import de.rtrx.a.flow.events.comments.ManuallyFetchedEvent
+import de.rtrx.a.tihi.database.TIHIDDL
+import de.rtrx.a.tihi.database.TIHILinkage
 import de.rtrx.a.unex.UnexFlow
 import de.rtrx.a.unex.UnexFlowFactory
 import dev.misfitlabs.kotlinguice4.KotlinModule
@@ -32,9 +36,9 @@ class TihiModule : KotlinModule(){
     fun provideDDLFunctions(config: Config) = with(DDL.Companion.Functions){
         listOf(
                 addParentIfNotExists,
-                commentIfNotExists,
+                TIHIDDL.createComment,
                 commentWithMessage,
-                createCheck,
+                TIHIDDL.createCheck,
                 redditUsername
         ).map { it(config) }}
 
@@ -42,18 +46,20 @@ class TihiModule : KotlinModule(){
     @Named("tables")
     fun provideDDLTable(config: Config) = with(DDL.Companion.Tables) { listOf(
             submissions,
-            check,
-            comments,
+            TIHIDDL.commentsTable,
+            relevantMessages,
             comments_caused,
             commentsHierarchy,
+            check,
             unexScore,
-            top_posts,
-            relevantMessages
+            TIHIDDL.topPosts
     ).map { it(config) }}
 
     override fun configure() {
         bind(Replyer::class.java).annotatedWith(Names.named("shameReply"))
                 .to(ShameReply::class.java)
+
+        bind(PostgresSQLinkage::class.java)
 
         bind(BotCommentAction::class.java).to(NotifyModerators::class.java)
         bind(CommentsHookedMonitorBuilder::class.java).to(BotCommentMonitorBuilder::class.java)

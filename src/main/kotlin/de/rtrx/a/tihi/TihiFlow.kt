@@ -1,7 +1,7 @@
-package de.rtrx.a
+package de.rtrx.a.tihi
 
-import com.google.inject.assistedinject.Assisted
 import com.uchuhimo.konf.Config
+import de.rtrx.a.RedditSpec
 import de.rtrx.a.database.Linkage
 import de.rtrx.a.flow.*
 import de.rtrx.a.flow.events.EventMultiplexerBuilder
@@ -61,35 +61,38 @@ class TihiFlow (
                 deletion.start()
                 val answered = deletion.safeSelectTo(awaitedReply.onAwait)
 
-
                 if (!answered.bool) {
                     callback(NoAnswerReceived(this@TihiFlow))
                     return@launch
                 }
-                val (comment, ref) = if (answered is ApprovalAndScoreCheckFactory.NotDeletedSufficientScore) {
-                    initValue.flair(config[RedditSpec.subreddit]).updateToCssClass("shame", "SHAME")
-                    shameReply(initValue.inspect(), "")
-                } else {
-                    replyFn(initValue.inspect(), awaitedReply.getCompleted().body)
-                            .also { (comment, _) ->
-                                linkage.commentMessage(initValue.id, awaitedReply.await(), comment)
-                            }
-                }
+                val (comment, ref) =
+                        if (answered is ApprovalAndScoreCheckFactory.NotDeletedSufficientScore) {
+                            initValue.flair(config[RedditSpec.subreddit]).updateToCssClass("shame", "SHAME")
+                            shameReply(initValue.inspect(), "")
+                        } else {
+                            replyFn(initValue.inspect(), awaitedReply.getCompleted().body)
+                                    .also { (comment, _) ->
+                                        linkage.commentMessage(initValue.id, awaitedReply.await(), comment)
+                                    }
+                        }
+
 
                 ref.distinguish(DistinguishedStatus.MODERATOR, true)
 
                 logger.trace("Starting the monitors for ${initValue.fullName}")
-                val dbCheckMonitor = dbCheckBuilder.setCommentEvent(manuallyFetchedEvent).setBotComment(comment).build(initValue)
-                val hookedMonitor = commentsHookedMonitorBuilder.setBotComment(comment).build(initValue)
+                val dbCheckMonitor = dbCheckBuilder.setCommentEvent(manuallyFetchedEvent)
+                        .setBotComment(comment)
+                        .build(initValue)
+
+                val hookedMonitor = commentsHookedMonitorBuilder
+                        .setBotComment(comment)
+                        .build(initValue)
                 subscribe(dbCheckMonitor::saveToDB, manuallyFetchedEvent)
                 subscribe(hookedMonitor::acceptData, manuallyFetchedEvent)
                 hookedMonitor.start()
                 dbCheckMonitor.start()
 
-
-
                 callback(FlowResult.NotFailedEnd.RegularEnd(this@TihiFlow))
-
 
             } catch (c: CancellationException){
                 callback(FlowResult.FailedEnd.Cancelled(this@TihiFlow))

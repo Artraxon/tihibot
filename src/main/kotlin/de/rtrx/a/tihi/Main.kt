@@ -1,7 +1,9 @@
-package de.rtrx.a
+package de.rtrx.a.tihi
 
 import com.google.inject.Guice
+import de.rtrx.a.*
 import de.rtrx.a.database.DDL
+import de.rtrx.a.tihi.database.TIHILinkage
 import de.rtrx.a.unex.UnexFlowDispatcher
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
@@ -13,7 +15,7 @@ fun main(args: Array<String>) {
     val configPath = options.get("configPath") as String? ?: ""
     val useDB = options.get("useDB") as Boolean? ?: true
 
-    val injector = Guice.createInjector(CoreModule(initConfig(configPath, RedditSpec, DBSpec, TihiConfig), useDB),
+    val injector = Guice.createInjector(CoreModule(initConfig(configPath, RedditSpec, DBSpec, TihiConfig), useDB, TIHILinkage::class),
             TihiModule())
     injector.getInstance(DDL::class.java).init(
             createDDL = (options.get("createDDL") as Boolean?) ?: true,
