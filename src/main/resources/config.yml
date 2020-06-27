@@ -2,12 +2,12 @@ reddit:
   subreddit: "unexBotTest"
 
   credentials:
-    username: unexTest
-    clientID: 0H2MTrFZq0PP0Q
-    clientSecret: DRt7Q8C0HuV0NRKSFVMzcwrneA8
-    password: "2WUp_10mmptrY5gtDNVBC-4WrRhacy"
+    username: username
+    clientID: id
+    clientSecret: secret
+    password: pw
     operatorUsername: Artraxaron
-    appID: "de.rtrx.a.unexbot"
+    appID: "id"
 
   submissions:
     maxTimeDistance: 3600000
