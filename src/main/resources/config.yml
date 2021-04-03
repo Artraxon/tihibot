@@ -39,12 +39,12 @@ reddit:
   scoring:
     timeUntilRemoval: 180000
     commentBody: |
-      **OP needs help. Also, he hates this post because...**
+      **OP needs help. Also, they hate this post because...**
 
       >!%{Reason}!<
 
       *****
-      **Do you hate it as well? Do you think his anger is reasonable? (I don't think so tbh)**
+      **Do you hate it as well? Do you think OP's anger is reasonable? (I don't think so tbh)**
       **Then upvote this comment, otherwise downvote it.**
 
       *****
@@ -77,7 +77,7 @@ tihi:
   approval:
     minScore: 1
     shameComment: |
-      **OP is a lazy fuck AND SHOULD BE ASHAMED OF HIMSELF, because he didn't explain why he hated it**
+      **OP is a lazy fuck AND SHOULD BE ASHAMED OF THEMSELF, because they didn't explain why they hated it**
 
       **SHAME, SHAME, SHAME, SHAME!**
 
